@@ -60,9 +60,7 @@ class _GreetingAndPhoto extends StatelessWidget {
           Expanded(
             child: Text(
               'Привет, Джамшутушка',
-              style: TextStyle(
-                fontSize: 16,
-              ),
+              style: TextStyle(fontSize: 16),
             ),
           ),
           CircleAvatar(
