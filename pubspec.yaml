@@ -11,6 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter  
+
   cupertino_icons:
   provider:
   freezed:
@@ -38,3 +41,4 @@ flutter:
     
 scripts:
   rebuild: dart run build_runner build --delete-conflicting-outputs
+  translate: flutter gen-l10n

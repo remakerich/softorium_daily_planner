@@ -1,0 +1,5 @@
+arb-dir: lib/core/localization
+output-dir: lib/core/localization/generated
+template-arb-file: en.arb
+nullable-getter: false
+synthetic-package: false

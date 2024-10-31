@@ -1,9 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:softorium_daily_planner/core/core.dart';
-import 'package:softorium_daily_planner/features/daily_planner/widgets/daily_planner_page.dart';
 import 'package:softorium_daily_planner/features/home/models/app_page.dart';
 import 'package:softorium_daily_planner/features/home/providers/page_provider.dart';
-import 'package:softorium_daily_planner/features/home/widgets/default_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -31,8 +29,8 @@ class _Body extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xffC8C7F9),
-              Color(0xffFCC8C5),
+              Color(0xffC8C7F9), // #F9F3FC
+              Color(0xffFCC8C5), // #FAF1E7
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -144,14 +142,7 @@ class _Pages extends StatelessWidget {
         itemCount: 4,
         physics: CustomPageViewScrollPhysics(),
         onPageChanged: context.read<PageProvider>().onPageChanged,
-        itemBuilder: (context, index) {
-          return [
-            DailyPlannerPage(),
-            DefaultPage(page: AppPage.cards()),
-            DefaultPage(page: AppPage.chart()),
-            DefaultPage(page: AppPage.notifications())
-          ][index];
-        },
+        itemBuilder: (context, index) => KeepAlivePage(child: AppPage.all[index].page),
       ),
     );
   }

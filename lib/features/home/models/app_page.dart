@@ -1,4 +1,6 @@
 import 'package:softorium_daily_planner/core/core.dart';
+import 'package:softorium_daily_planner/features/daily_planner/widgets/daily_planner_page.dart';
+import 'package:softorium_daily_planner/features/home/widgets/default_page.dart';
 
 part 'app_page.freezed.dart';
 
@@ -19,6 +21,13 @@ class AppPage with _$AppPage {
       ];
 
   int get index => all.indexOf(this);
+
+  Widget get page => when(
+        dailyPlanner: () => DailyPlannerPage(),
+        cards: () => DefaultPage(page: this),
+        chart: () => DefaultPage(page: this),
+        notifications: () => DefaultPage(page: this),
+      );
 
   String get name => when(
         dailyPlanner: () => 'План на день',
