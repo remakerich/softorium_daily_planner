@@ -25,12 +25,13 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xffC8C7F9), // #F9F3FC
-              Color(0xffFCC8C5), // #FAF1E7
+              Color(0xffC8C7F9),
+              Color(0xffFCC8C5),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

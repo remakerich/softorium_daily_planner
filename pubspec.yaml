@@ -22,6 +22,9 @@ dependencies:
   json_serializable:
   flutter_svg:
   intl:
+  hive:
+  path_provider:
+  uuid:
 
 dev_dependencies:
   flutter_test:

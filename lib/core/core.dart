@@ -1,3 +1,5 @@
+export 'package:softorium_daily_planner/core/config/hive_database.dart';
+
 export 'package:softorium_daily_planner/core/extensions/datetime_extension.dart';
 
 export 'package:softorium_daily_planner/core/localization/generated/app_localizations.dart';
@@ -14,3 +16,5 @@ export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter/foundation.dart';
 export 'package:flutter_svg/svg.dart';
+export 'package:hive/hive.dart';
+export 'package:path_provider/path_provider.dart';

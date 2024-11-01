@@ -11,6 +11,10 @@ extension DateTimeExtension on DateTime {
     return DateFormat('dd.MM.yyyy').format(this);
   }
 
+  DateTime get onlyDate {
+    return DateTime(year, month, day);
+  }
+
   bool isTheSameDayWith(DateTime another) {
     final thisFormatted = DateTime(year, month, day);
     final anotherFormatted = DateTime(another.year, another.month, another.day);
