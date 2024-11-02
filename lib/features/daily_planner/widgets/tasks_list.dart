@@ -13,22 +13,29 @@ class TasksList extends StatelessWidget {
       (e) => e.tasksForSelectedDay,
     );
 
-    return RawScrollbar(
-      padding: const EdgeInsets.fromLTRB(0, 18, 5, 14),
-      radius: const Radius.circular(4),
-      thickness: 4,
-      thumbVisibility: true,
-      child: ListView.builder(
-        shrinkWrap: true,
-        padding: EdgeInsets.only(bottom: 14),
-        itemCount: dayTasks.length + 1,
-        itemBuilder: (context, index) {
-          if (index == dayTasks.length) {
-            return NewTaskButton();
-          }
+    final height = ((dayTasks.length + 1) * 45) + 15;
 
-          return TaskTile(dayTasks[index]);
-        },
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      curve: Curves.ease,
+      height: height.toDouble(),
+      child: RawScrollbar(
+        padding: const EdgeInsets.fromLTRB(0, 18, 5, 14),
+        radius: const Radius.circular(4),
+        thickness: 4,
+        thumbVisibility: true,
+        child: ListView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.only(bottom: 15),
+          itemCount: dayTasks.length + 1,
+          itemBuilder: (context, index) {
+            if (index == dayTasks.length) {
+              return NewTaskButton();
+            }
+
+            return TaskTile(dayTasks[index]);
+          },
+        ),
       ),
     );
   }

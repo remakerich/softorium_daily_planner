@@ -17,18 +17,20 @@ class TaskTile extends StatelessWidget {
       (e) => e.selectedTaskId == task.id,
     );
 
-    return SizedBox(
-      height: 40,
-      child: Material(
-        color: isTaskSelected ? Color(0xffBEB7EB).withOpacity(.2) : Colors.white,
-        child: InkWell(
-          onLongPress: () {
-            HapticFeedback.mediumImpact();
-            context.read<DailyPlannerProvider>().toggleTaskDone(task);
-          },
-          onTap: () {
-            context.read<DailyPlannerProvider>().selectTask(task);
-          },
+    return Material(
+      color: isTaskSelected ? Color(0xffBEB7EB).withOpacity(.2) : Colors.white,
+      child: InkWell(
+        splashColor: Color(0xffBEB7EB).withOpacity(.2),
+        highlightColor: Color(0xffBEB7EB).withOpacity(.2),
+        onLongPress: () {
+          HapticFeedback.mediumImpact();
+          context.read<DailyPlannerProvider>().toggleTaskDone(task);
+        },
+        onTap: () {
+          context.read<DailyPlannerProvider>().selectTask(task);
+        },
+        child: SizedBox(
+          height: 45,
           child: Row(
             children: [
               const SizedBox(width: 20),
@@ -44,6 +46,8 @@ class TaskTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   task.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 16,
                     color: task.isDone ? Color(0xffCECECE) : null,
@@ -56,20 +60,21 @@ class TaskTile extends StatelessWidget {
                     context.read<DailyPlannerProvider>().deleteTask(task);
                   },
                   child: Container(
-                    height: 40,
-                    color: Colors.transparent,
-                    padding: EdgeInsets.symmetric(horizontal: 8),
                     alignment: Alignment.center,
+                    color: Colors.transparent,
+                    height: 40,
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Text(
                       'Удалить',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.italic,
-                        decoration: TextDecoration.underline,
                       ),
                     ),
                   ),
-                )
+                ),
             ],
           ),
         ),

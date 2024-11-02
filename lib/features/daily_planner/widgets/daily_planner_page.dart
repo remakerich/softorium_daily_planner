@@ -24,36 +24,49 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      body: Container(
-        margin: EdgeInsets.fromLTRB(18, 31, 18, 18),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 8),
-              color: Color(0xff260347).withOpacity(.08),
-              blurRadius: 8,
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Container(
+            margin: EdgeInsets.fromLTRB(18, 30, 18, 18),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 8),
+                  color: Color(0xff260347).withOpacity(.08),
+                  blurRadius: 8,
+                ),
+              ],
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DaysHorizontalScroll(),
-              _PlanDateHeader(),
-              Flexible(
-                child: TasksList(),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 80),
+                  _PlanDateHeader(),
+                  Flexible(
+                    child: TasksList(),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(18, 30, 18, 0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            child: DaysHorizontalScroll(),
+          ),
+        ),
+      ],
     );
   }
 }

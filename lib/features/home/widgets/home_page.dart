@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:softorium_daily_planner/core/core.dart';
 import 'package:softorium_daily_planner/features/home/models/app_page.dart';
 import 'package:softorium_daily_planner/features/home/providers/page_provider.dart';
@@ -40,7 +40,7 @@ class _Body extends StatelessWidget {
         child: Column(
           children: [
             _GreetingAndPhoto(),
-            _Pages(),
+            Expanded(child: _Pages()),
             _BottomNavBar(),
           ],
         ),
@@ -60,7 +60,7 @@ class _GreetingAndPhoto extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'Привет, Джамшутушка',
+              'Привет, Анастасия',
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -79,47 +79,68 @@ class _BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(18, 0, 18, MediaQuery.of(context).padding.bottom + 18),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(.5),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: EdgeInsets.fromLTRB(18, 0, 18, MediaQuery.of(context).padding.bottom + 18),
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          ...AppPage.all.map(_NavBarButton.new),
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(.5),
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: SmoothPageIndicator(
+              controller: context.read<PageProvider>().pageController,
+              count: AppPage.all.length,
+              effect: WormEffect(
+                dotWidth: 56,
+                dotHeight: 56,
+                radius: 56,
+                spacing: 20,
+                dotColor: Color(0xffF4F4F5),
+                activeDotColor: Color(0xffBEB7EB),
+              ),
+            ),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...AppPage.all.map(_NavBarIcon.new),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
-class _NavBarButton extends StatelessWidget {
-  const _NavBarButton(this.page);
+class _NavBarIcon extends StatelessWidget {
+  const _NavBarIcon(this.page);
 
   final AppPage page;
 
   @override
   Widget build(BuildContext context) {
-    final currentTab = context.select<PageProvider, int>(
-      (e) => e.currentTab,
+    final isCurrentTab = context.select<PageProvider, bool>(
+      (e) => e.currentTab == page.index,
     );
 
     return GestureDetector(
       onTap: () {
-        HapticFeedback.mediumImpact();
         context.read<PageProvider>().onNavBarButtonTap(page.index);
       },
       child: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: currentTab == page.index ? Color(0xffBEB7EB) : Color(0xffF4F4F5),
-          borderRadius: BorderRadius.circular(100),
-        ),
+        width: 76,
+        height: 76,
+        color: Colors.transparent,
+        alignment: Alignment.center,
         child: SvgPicture.asset(
           page.svgIcon,
+          colorFilter: ColorFilter.mode(
+            isCurrentTab ? Colors.white : Colors.black,
+            BlendMode.srcATop,
+          ),
         ),
       ),
     );
@@ -131,18 +152,12 @@ class _Pages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pageController = context.select<PageProvider, PageController>(
-      (e) => e.pageController,
-    );
-
-    return Expanded(
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 4,
-        physics: CustomPageViewScrollPhysics(),
-        onPageChanged: context.read<PageProvider>().onPageChanged,
-        itemBuilder: (context, index) => KeepAlivePage(child: AppPage.all[index].page),
-      ),
+    return PageView.builder(
+      controller: context.read<PageProvider>().pageController,
+      itemCount: AppPage.all.length,
+      physics: CustomPageViewScrollPhysics(),
+      onPageChanged: context.read<PageProvider>().onPageChanged,
+      itemBuilder: (context, index) => KeepAlivePage(child: AppPage.all[index].page),
     );
   }
 }

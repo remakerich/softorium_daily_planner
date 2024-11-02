@@ -12,6 +12,12 @@ class PageProvider extends ProviderBase {
   }
 
   onNavBarButtonTap(int index) {
-    pageController.jumpToPage(index);
+    final duration = (currentTab - index).abs() * 200;
+
+    pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: duration),
+      curve: Curves.ease,
+    );
   }
 }

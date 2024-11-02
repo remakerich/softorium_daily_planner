@@ -34,7 +34,7 @@ class DailyPlannerProvider extends ProviderBase {
     return (_tasksByDate[dateKey] ?? []).toList();
   }
 
-  addNewTask(BuildContext context) {
+  addNewTask() {
     final title = newTaskController.text.trim();
 
     if (title.isEmpty) {
@@ -52,7 +52,6 @@ class DailyPlannerProvider extends ProviderBase {
     _tasksByDate[dateKey] == null ? _tasksByDate[dateKey] = [newTask] : _tasksByDate[dateKey]!.add(newTask);
 
     emit();
-    Navigator.of(context).pop();
     newTaskController.clear();
     _dailyTasksStorage.put(newTask);
   }
