@@ -13,11 +13,10 @@ class DaysHorizontalScroll extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xffEDEBF9),
       ),
-      child: ListView.separated(
-        padding: EdgeInsets.all(12),
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 6),
         scrollDirection: Axis.horizontal,
         itemCount: daysOfMonth.length,
-        separatorBuilder: (context, index) => SizedBox(width: 12),
         itemBuilder: (context, index) {
           final day = daysOfMonth[index];
           return _DayButton(day);
@@ -46,41 +45,45 @@ class _DayButton extends StatelessWidget {
       onTap: () {
         context.read<DailyPlannerProvider>().setSelectedDay(day);
       },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 150),
-        curve: Curves.ease,
-        width: 40,
-        decoration: BoxDecoration(
-          color: isSelected ? Color(0xffBEB7EB) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 4,
-              height: 4,
-              margin: EdgeInsets.only(top: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: isToday ? Color(0xffD9D9D9) : Colors.transparent,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+        color: Colors.transparent,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          curve: Curves.ease,
+          width: 40,
+          decoration: BoxDecoration(
+            color: isSelected ? Color(0xffBEB7EB) : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 4,
+                height: 4,
+                margin: EdgeInsets.only(top: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: isToday ? Color(0xffD9D9D9) : Colors.transparent,
+                ),
               ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              '${day.day}',
-              style: TextStyle(
-                color: isSelected ? Colors.white : null,
+              SizedBox(height: 4),
+              Text(
+                '${day.day}',
+                style: TextStyle(
+                  color: isSelected ? Colors.white : null,
+                ),
               ),
-            ),
-            Text(
-              day.dayOfWeekShort(context),
-              style: TextStyle(
-                color: isSelected ? Colors.white : Color(0xffAFABC6),
+              Text(
+                day.dayOfWeekShort(context),
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Color(0xffAFABC6),
+                ),
               ),
-            ),
-            SizedBox(height: 2),
-          ],
+              SizedBox(height: 2),
+            ],
+          ),
         ),
       ),
     );

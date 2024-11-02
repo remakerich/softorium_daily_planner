@@ -86,7 +86,6 @@ class _NewTaskInputField extends StatelessWidget {
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.zero,
-        hintText: 'Название задачи',
         border: InputBorder.none,
         isDense: true,
       ),

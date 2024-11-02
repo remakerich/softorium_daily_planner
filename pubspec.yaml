@@ -33,6 +33,17 @@ dev_dependencies:
 
   flutter_lints:
   build_runner:
+  flutter_native_splash:
+
+# dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#C8C7F9"
+  color_dark: "#C8C7F9"
+  image: assets/images/transparent.png
+  android_12:
+    icon_background_color: "#C8C7F9"
+    icon_background_color_dark: "#C8C7F9"
+    image: assets/images/transparent.png  
 
 flutter:
 

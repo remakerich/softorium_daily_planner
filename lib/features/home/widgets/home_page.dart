@@ -2,6 +2,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:softorium_daily_planner/core/core.dart';
 import 'package:softorium_daily_planner/features/home/models/app_page.dart';
 import 'package:softorium_daily_planner/features/home/providers/page_provider.dart';
+import 'package:softorium_daily_planner/features/home/widgets/splash_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -24,27 +25,32 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xffC8C7F9),
-              Color(0xffFCC8C5),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+    return Stack(
+      children: [
+        Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xffC8C7F9),
+                  Color(0xffFCC8C5),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              children: [
+                _GreetingAndPhoto(),
+                Expanded(child: _Pages()),
+                _BottomNavBar(),
+              ],
+            ),
           ),
         ),
-        child: Column(
-          children: [
-            _GreetingAndPhoto(),
-            Expanded(child: _Pages()),
-            _BottomNavBar(),
-          ],
-        ),
-      ),
+        SplashScreen(),
+      ],
     );
   }
 }
@@ -64,9 +70,9 @@ class _GreetingAndPhoto extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
           ),
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: AssetImage('assets/images/girl.png'),
+          SizedBox(
+            width: 40,
+            height: 40,
           ),
         ],
       ),
