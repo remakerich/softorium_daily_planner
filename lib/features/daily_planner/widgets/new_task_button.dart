@@ -58,6 +58,7 @@ class _NewTaskLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      key: Key('new task line'),
       'Новая задача',
       style: TextStyle(
         fontSize: 16,
@@ -78,6 +79,7 @@ class _NewTaskInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      key: Key('new task input'),
       controller: context.read<DailyPlannerProvider>().newTaskController,
       autofocus: true,
       onSubmitted: (_) {

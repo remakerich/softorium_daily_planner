@@ -14,12 +14,27 @@ class DaysHorizontalScroll extends StatelessWidget {
         color: Color(0xffEDEBF9),
       ),
       child: ListView.builder(
+        key: Key('dates scroll view'),
         padding: EdgeInsets.symmetric(horizontal: 6),
         scrollDirection: Axis.horizontal,
         itemCount: daysOfMonth.length,
         itemBuilder: (context, index) {
           final day = daysOfMonth[index];
-          return _DayButton(day);
+          final isToday = DateTime.now().isTheSameDayWith(day);
+
+          late final String key;
+
+          if (index == 0) {
+            key = 'first day button';
+          } else if (index == daysOfMonth.length - 1) {
+            key = 'last day button';
+          } else if (isToday) {
+            key = 'current day button';
+          } else {
+            key = '$index';
+          }
+
+          return _DayButton(key: Key(key), day);
         },
       ),
     );
@@ -27,7 +42,10 @@ class DaysHorizontalScroll extends StatelessWidget {
 }
 
 class _DayButton extends StatelessWidget {
-  const _DayButton(this.day);
+  const _DayButton(
+    this.day, {
+    super.key,
+  });
 
   final DateTime day;
 
@@ -35,11 +53,9 @@ class _DayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isToday = DateTime.now().isTheSameDayWith(day);
 
-    final selectedDay = context.select<DailyPlannerProvider, DateTime>(
-      (e) => e.selectedDay,
+    final isSelected = context.select<DailyPlannerProvider, bool>(
+      (e) => day.isTheSameDayWith(e.selectedDay),
     );
-
-    final isSelected = day.isTheSameDayWith(selectedDay);
 
     return GestureDetector(
       onTap: () {

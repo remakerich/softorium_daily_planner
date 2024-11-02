@@ -159,6 +159,7 @@ class _Pages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
+      key: Key('main page view'),
       controller: context.read<PageProvider>().pageController,
       itemCount: AppPage.all.length,
       physics: CustomPageViewScrollPhysics(),
