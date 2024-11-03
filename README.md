@@ -1,4 +1,4 @@
-<img src="image.png" alt="image" width="300" height="auto">
+<img src="assets/screenshots/1.png" alt="image" width="auto" height="200"> <img src="assets/screenshots/2.png" alt="image" width="auto" height="200"> <img src="assets/screenshots/3.png" alt="image" width="auto" height="200">
 
 ## Задание
 
