@@ -1,5 +1,6 @@
 import 'package:softorium_daily_planner/core/core.dart';
 import 'package:softorium_daily_planner/features/daily_planner/providers/daily_planner_provider.dart';
+import 'package:softorium_daily_planner/features/daily_planner/widgets/task_indicator.dart';
 
 class NewTaskButton extends StatefulWidget {
   const NewTaskButton({super.key});
@@ -13,38 +14,26 @@ class _NewTaskButtonState extends State<NewTaskButton> {
 
   @override
   Widget build(BuildContext context) {
+    final inputField = _NewTaskInputField(
+      onTaskAdded: () {
+        setState(() {
+          textFieldEnabled = false;
+        });
+      },
+    );
+
     return GestureDetector(
       onTap: () {
         setState(() {
           textFieldEnabled = true;
         });
       },
-      child: Container(
+      child: SizedBox(
         height: 45,
-        color: Colors.transparent,
         child: Row(
           children: [
-            const SizedBox(width: 20),
-            Container(
-              height: 16,
-              width: 16,
-              decoration: BoxDecoration(
-                color: Color(0xffEDEBF9),
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: textFieldEnabled
-                  ? _NewTaskInputField(
-                      onTaskAdded: () {
-                        setState(() {
-                          textFieldEnabled = false;
-                        });
-                      },
-                    )
-                  : _NewTaskLine(),
-            ),
+            TaskIndicator(isDone: false),
+            Expanded(child: textFieldEnabled ? inputField : _NewTaskLine()),
           ],
         ),
       ),
@@ -58,7 +47,7 @@ class _NewTaskLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      key: Key('new task line'),
+      key: Key(IntegrationTestConstants.newTaskLineKey),
       'Новая задача',
       style: TextStyle(
         fontSize: 16,
@@ -79,7 +68,6 @@ class _NewTaskInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      key: Key('new task input'),
       controller: context.read<DailyPlannerProvider>().newTaskController,
       autofocus: true,
       onSubmitted: (_) {

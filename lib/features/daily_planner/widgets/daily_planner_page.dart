@@ -14,59 +14,63 @@ class DailyPlannerPage extends StatelessWidget {
           create: (context) => DailyPlannerProvider(),
         ),
       ],
-      child: _Body(),
+      child: Stack(
+        children: [
+          _TasksList(),
+          DaysHorizontalScroll(),
+        ],
+      ),
     );
   }
 }
 
-class _Body extends StatelessWidget {
-  const _Body();
+class _TasksList extends StatelessWidget {
+  const _TasksList();
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            margin: EdgeInsets.fromLTRB(18, 30, 18, 18),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 8),
-                  color: Color(0xff260347).withOpacity(.08),
-                  blurRadius: 8,
-                ),
-              ],
+    return _TaskListDecoration(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 80),
+          _PlanDateHeader(),
+          Flexible(child: TasksList()),
+        ],
+      ),
+    );
+  }
+}
+
+class _TaskListDecoration extends StatelessWidget {
+  const _TaskListDecoration({
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        margin: EdgeInsets.fromLTRB(18, 30, 18, 18),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(0, 8),
+              color: Color(0xff260347).withOpacity(.08),
+              blurRadius: 8,
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 80),
-                  _PlanDateHeader(),
-                  Flexible(
-                    child: TasksList(),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          ],
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(18, 30, 18, 0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            child: DaysHorizontalScroll(),
-          ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: child,
         ),
-      ],
+      ),
     );
   }
 }
@@ -82,9 +86,7 @@ class _PlanDateHeader extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Text(
-        'План на день ${selectedDay.dateReadable}',
-      ),
+      child: Text('План на день ${selectedDay.dateReadable}'),
     );
   }
 }

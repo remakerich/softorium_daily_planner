@@ -5,7 +5,7 @@ import 'package:uuid/v4.dart';
 
 class DailyPlannerProvider extends ProviderBase {
   DailyPlannerProvider() {
-    init();
+    _init();
   }
 
   DateTime get selectedDay => _selectedDay;
@@ -20,7 +20,7 @@ class DailyPlannerProvider extends ProviderBase {
 
   final _dailyTasksStorage = DailyTasksStorage();
 
-  init() {
+  _init() {
     _tasksByDate = _dailyTasksStorage.getTasks();
   }
 
