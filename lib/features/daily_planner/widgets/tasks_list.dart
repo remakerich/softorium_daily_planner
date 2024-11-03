@@ -1,7 +1,7 @@
 import 'package:softorium_daily_planner/core/core.dart';
 import 'package:softorium_daily_planner/features/daily_planner/models/daily_task.dart';
 import 'package:softorium_daily_planner/features/daily_planner/providers/daily_planner_provider.dart';
-import 'package:softorium_daily_planner/features/daily_planner/widgets/new_task_button.dart';
+import 'package:softorium_daily_planner/features/daily_planner/widgets/new_task_tile.dart';
 import 'package:softorium_daily_planner/features/daily_planner/widgets/task_tile.dart';
 
 class TasksList extends StatelessWidget {
@@ -30,7 +30,7 @@ class TasksList extends StatelessWidget {
           itemCount: dayTasks.length + 1,
           itemBuilder: (context, index) {
             if (index == dayTasks.length) {
-              return NewTaskButton();
+              return NewTaskTile();
             }
 
             return TaskTile(dayTasks[index]);

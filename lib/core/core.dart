@@ -12,6 +12,7 @@ export 'package:softorium_daily_planner/core/models/custom_scroll_physics.dart';
 export 'package:softorium_daily_planner/core/theme/theme.dart';
 
 export 'package:softorium_daily_planner/core/widgets/keep_alive_page.dart';
+export 'package:softorium_daily_planner/core/widgets/unfocus.dart';
 
 export 'package:flutter/material.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';

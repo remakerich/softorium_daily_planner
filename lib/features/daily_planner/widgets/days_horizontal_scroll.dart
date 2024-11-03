@@ -18,7 +18,6 @@ class _DaysHorizontalScrollState extends State<DaysHorizontalScroll> {
   void _scrollToSelectedMonth() {
     Scrollable.ensureVisible(
       GlobalObjectKey(IntegrationTestConstants.currentDayButtonKey).currentContext!,
-      alignment: .67,
     );
   }
 
@@ -95,6 +94,7 @@ class _DayButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<DailyPlannerProvider>().setSelectedDay(day);
+        FocusScope.of(context).unfocus();
       },
       child: _DayButtonDecoration(
         isSelected: isSelected,

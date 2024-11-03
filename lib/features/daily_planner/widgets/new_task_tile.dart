@@ -2,38 +2,29 @@ import 'package:softorium_daily_planner/core/core.dart';
 import 'package:softorium_daily_planner/features/daily_planner/providers/daily_planner_provider.dart';
 import 'package:softorium_daily_planner/features/daily_planner/widgets/task_indicator.dart';
 
-class NewTaskButton extends StatefulWidget {
-  const NewTaskButton({super.key});
+class NewTaskTile extends StatefulWidget {
+  const NewTaskTile({super.key});
 
   @override
-  State<NewTaskButton> createState() => _NewTaskButtonState();
+  State<NewTaskTile> createState() => _NewTaskTileState();
 }
 
-class _NewTaskButtonState extends State<NewTaskButton> {
-  bool textFieldEnabled = false;
-
+class _NewTaskTileState extends State<NewTaskTile> {
   @override
   Widget build(BuildContext context) {
-    final inputField = _NewTaskInputField(
-      onTaskAdded: () {
-        setState(() {
-          textFieldEnabled = false;
-        });
-      },
+    final taskInputEnabled = context.select<DailyPlannerProvider, bool>(
+      (e) => e.taskInputEnabled,
     );
 
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          textFieldEnabled = true;
-        });
-      },
-      child: SizedBox(
+      onTap: context.read<DailyPlannerProvider>().enableTaskInput,
+      child: Container(
+        color: Colors.transparent,
         height: 45,
         child: Row(
           children: [
             TaskIndicator(isDone: false),
-            Expanded(child: textFieldEnabled ? inputField : _NewTaskLine()),
+            Expanded(child: taskInputEnabled ? _NewTaskInputField() : _NewTaskLine()),
           ],
         ),
       ),
@@ -58,20 +49,41 @@ class _NewTaskLine extends StatelessWidget {
   }
 }
 
-class _NewTaskInputField extends StatelessWidget {
-  const _NewTaskInputField({
-    required this.onTaskAdded,
-  });
+class _NewTaskInputField extends StatefulWidget {
+  const _NewTaskInputField();
 
-  final VoidCallback onTaskAdded;
+  @override
+  State<_NewTaskInputField> createState() => _NewTaskInputFieldState();
+}
+
+class _NewTaskInputFieldState extends State<_NewTaskInputField> {
+  final focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(removeTextFieldOnUnfocus);
+  }
+
+  removeTextFieldOnUnfocus() {
+    if (!focusNode.hasFocus) {
+      context.read<DailyPlannerProvider>().disableTaskInput();
+    }
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: focusNode,
       controller: context.read<DailyPlannerProvider>().newTaskController,
       autofocus: true,
       onSubmitted: (_) {
-        onTaskAdded();
         context.read<DailyPlannerProvider>().addNewTask();
       },
       decoration: InputDecoration(

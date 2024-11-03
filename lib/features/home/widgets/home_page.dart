@@ -15,42 +15,44 @@ class Home extends StatelessWidget {
           create: (context) => PageProvider(),
         ),
       ],
-      child: _Body(),
+      child: Unfocus(
+        child: Stack(
+          children: [
+            _Home(),
+            SplashScreen(),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class _Body extends StatelessWidget {
-  const _Body();
+class _Home extends StatelessWidget {
+  const _Home();
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xffC8C7F9),
-                  Color(0xffFCC8C5),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              children: [
-                _GreetingAndPhoto(),
-                Expanded(child: _Pages()),
-                _BottomNavBar(),
-              ],
-            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xffC8C7F9),
+              Color(0xffFCC8C5),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
-        SplashScreen(),
-      ],
+        child: Column(
+          children: [
+            _GreetingAndPhoto(),
+            Expanded(child: _Pages()),
+            _BottomNavBar(),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -163,7 +165,10 @@ class _Pages extends StatelessWidget {
       controller: context.read<PageProvider>().pageController,
       itemCount: AppPage.all.length,
       physics: CustomPageViewScrollPhysics(),
-      onPageChanged: context.read<PageProvider>().onPageChanged,
+      onPageChanged: (index) {
+        context.read<PageProvider>().onPageChanged(index);
+        FocusScope.of(context).unfocus();
+      },
       itemBuilder: (context, index) => KeepAlivePage(child: AppPage.all[index].page),
     );
   }

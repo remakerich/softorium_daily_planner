@@ -14,11 +14,13 @@ class DailyPlannerPage extends StatelessWidget {
           create: (context) => DailyPlannerProvider(),
         ),
       ],
-      child: Stack(
-        children: [
-          _TasksList(),
-          DaysHorizontalScroll(),
-        ],
+      child: Unfocus(
+        child: Stack(
+          children: [
+            _TasksList(),
+            DaysHorizontalScroll(),
+          ],
+        ),
       ),
     );
   }

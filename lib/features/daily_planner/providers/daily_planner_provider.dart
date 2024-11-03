@@ -20,6 +20,9 @@ class DailyPlannerProvider extends ProviderBase {
 
   final _dailyTasksStorage = DailyTasksStorage();
 
+  bool get taskInputEnabled => _taskInputEnabled;
+  bool _taskInputEnabled = false;
+  
   _init() {
     _tasksByDate = _dailyTasksStorage.getTasks();
   }
@@ -82,6 +85,17 @@ class DailyPlannerProvider extends ProviderBase {
     }
 
     _selectedTaskId = task.id;
+    emit();
+  }
+
+  enableTaskInput() {
+    _taskInputEnabled = true;
+    emit();
+  }
+
+  disableTaskInput() {
+    _taskInputEnabled = false;
+    newTaskController.clear();
     emit();
   }
 }
