@@ -2,7 +2,8 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:softorium_daily_planner/core/config/integration_test_constants.dart';
 import 'package:test/test.dart';
 
-// flutter driver --target=test/test_app.dart --driver=test/integration_test.dart
+// интеграционный тест
+// flutter driver --target=integration_test/test_app.dart --driver=integration_test/integration_test.dart
 
 void main() {
   late FlutterDriver driver;

@@ -13,7 +13,7 @@ class TasksList extends StatelessWidget {
       (e) => e.tasksForSelectedDay,
     );
 
-    final height = ((dayTasks.length + 1) * 45) + 15;
+    final height = ((dayTasks.length + 1) * 45) + 30;
 
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
@@ -26,7 +26,7 @@ class TasksList extends StatelessWidget {
         thumbVisibility: true,
         child: ListView.builder(
           shrinkWrap: true,
-          padding: EdgeInsets.only(bottom: 15),
+          padding: EdgeInsets.symmetric(vertical: 15),
           itemCount: dayTasks.length + 1,
           itemBuilder: (context, index) {
             if (index == dayTasks.length) {

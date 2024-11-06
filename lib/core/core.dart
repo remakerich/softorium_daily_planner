@@ -10,6 +10,7 @@ export 'package:softorium_daily_planner/core/models/provider_base.dart';
 export 'package:softorium_daily_planner/core/models/custom_scroll_physics.dart';
 
 export 'package:softorium_daily_planner/core/theme/theme.dart';
+export 'package:softorium_daily_planner/core/theme/app_colors.dart';
 
 export 'package:softorium_daily_planner/core/widgets/keep_alive_page.dart';
 export 'package:softorium_daily_planner/core/widgets/unfocus.dart';

@@ -15,7 +15,7 @@ class TaskIndicator extends StatelessWidget {
       height: 16,
       width: 16,
       decoration: BoxDecoration(
-        color: isDone ? Color(0xffCECECE) : Color(0xffEDEBF9),
+        color: isDone ? AppColors.taskDone : AppColors.secondary,
         borderRadius: BorderRadius.circular(16),
       ),
     );

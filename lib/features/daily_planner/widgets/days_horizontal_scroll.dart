@@ -68,7 +68,7 @@ class _DaysScrollDecoration extends StatelessWidget {
         child: Container(
           height: 80,
           decoration: BoxDecoration(
-            color: Color(0xffEDEBF9),
+            color: AppColors.secondary,
           ),
           child: child,
         ),
@@ -127,7 +127,7 @@ class _DayName extends StatelessWidget {
       child: Text(
         day.dayOfWeekShort(context),
         style: TextStyle(
-          color: isSelected ? Colors.white : Color(0xffAFABC6),
+          color: isSelected ? Colors.white : AppColors.tertiary,
         ),
       ),
     );
@@ -171,7 +171,7 @@ class _CurrentDayIndicator extends StatelessWidget {
       margin: EdgeInsets.only(top: 4, bottom: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: isToday ? Color(0xffD9D9D9) : Colors.transparent,
+        color: isToday ? AppColors.currentDay : Colors.transparent,
       ),
     );
   }
@@ -196,8 +196,8 @@ class _DayButtonDecoration extends StatelessWidget {
         curve: Curves.ease,
         width: 40,
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xffBEB7EB) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          color: isSelected ? AppColors.primary : Colors.white,
+          borderRadius: BorderRadius.circular(24),
         ),
         child: child,
       ),

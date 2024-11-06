@@ -35,15 +35,8 @@ class _Home extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xffC8C7F9),
-              Color(0xffFCC8C5),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        decoration: BoxDecoration(
+          gradient: AppColors.backgroundGradient,
         ),
         child: Column(
           children: [
@@ -93,7 +86,7 @@ class _BottomNavBar extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(.5),
               borderRadius: BorderRadius.circular(100),
@@ -106,8 +99,8 @@ class _BottomNavBar extends StatelessWidget {
                 dotHeight: 56,
                 radius: 56,
                 spacing: 20,
-                dotColor: Color(0xffF4F4F5),
-                activeDotColor: Color(0xffBEB7EB),
+                dotColor: AppColors.navBarItem,
+                activeDotColor: AppColors.primary,
               ),
             ),
           ),

@@ -42,6 +42,7 @@ class _NewTaskLine extends StatelessWidget {
       'Новая задача',
       style: TextStyle(
         fontSize: 16,
+        fontWeight: FontWeight.w300,
         fontStyle: FontStyle.italic,
         decoration: TextDecoration.underline,
       ),
@@ -80,13 +81,19 @@ class _NewTaskInputFieldState extends State<_NewTaskInputField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLength: 20,
       focusNode: focusNode,
       controller: context.read<DailyPlannerProvider>().newTaskController,
       autofocus: true,
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w300,
+      ),
       onSubmitted: (_) {
         context.read<DailyPlannerProvider>().addNewTask();
       },
       decoration: InputDecoration(
+        counterText: '',
         contentPadding: EdgeInsets.zero,
         border: InputBorder.none,
         isDense: true,

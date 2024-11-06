@@ -19,10 +19,8 @@ class TaskTile extends StatelessWidget {
     );
 
     return Material(
-      color: isTaskSelected ? Color(0xffBEB7EB).withOpacity(.2) : Colors.white,
+      color: isTaskSelected ? AppColors.primary.withOpacity(.2) : Colors.white,
       child: InkWell(
-        splashColor: Color(0xffBEB7EB).withOpacity(.2),
-        highlightColor: Color(0xffBEB7EB).withOpacity(.2),
         onLongPress: () {
           HapticFeedback.mediumImpact();
           context.read<DailyPlannerProvider>().toggleTaskDone(task);
@@ -57,7 +55,8 @@ class _TaskTitle extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: 16,
-        color: task.isDone ? Color(0xffCECECE) : null,
+        fontWeight: FontWeight.w300,
+        color: task.isDone ? AppColors.taskDone : null,
       ),
     );
   }
@@ -83,10 +82,10 @@ class _DeleteTaskButton extends StatelessWidget {
         child: Text(
           'Удалить',
           style: TextStyle(
-            fontSize: 13,
-            color: Colors.red,
-            fontWeight: FontWeight.w600,
+            fontSize: 10,
+            fontWeight: FontWeight.w300,
             fontStyle: FontStyle.italic,
+            decoration: TextDecoration.underline,
           ),
         ),
       ),

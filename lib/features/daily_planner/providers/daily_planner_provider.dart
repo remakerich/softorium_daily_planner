@@ -4,37 +4,38 @@ import 'package:softorium_daily_planner/features/daily_planner/models/daily_task
 import 'package:uuid/v4.dart';
 
 class DailyPlannerProvider extends ProviderBase {
-  DailyPlannerProvider() {
+  DailyPlannerProvider(
+    this._dailyTasksStorage,
+  ) {
     _init();
   }
+
+  final DailyTasksStorage _dailyTasksStorage;
+  late final Map<DateTime, List<DailyTask>> _tasksByDate;
+  
+  final newTaskController = TextEditingController();
 
   DateTime get selectedDay => _selectedDay;
   DateTime _selectedDay = DateTime.now();
 
-  late final Map<DateTime, List<DailyTask>> _tasksByDate;
-
-  final newTaskController = TextEditingController();
-
   String? get selectedTaskId => _selectedTaskId;
   String? _selectedTaskId;
 
-  final _dailyTasksStorage = DailyTasksStorage();
-
   bool get taskInputEnabled => _taskInputEnabled;
   bool _taskInputEnabled = false;
-  
+
   _init() {
     _tasksByDate = _dailyTasksStorage.getTasks();
-  }
-
-  setSelectedDay(DateTime day) {
-    _selectedDay = day;
-    emit();
   }
 
   List<DailyTask> get tasksForSelectedDay {
     final dateKey = selectedDay.onlyDate;
     return (_tasksByDate[dateKey] ?? []).toList();
+  }
+
+  setSelectedDay(DateTime day) {
+    _selectedDay = day;
+    emit();
   }
 
   addNewTask() {

@@ -1,4 +1,5 @@
 import 'package:softorium_daily_planner/core/core.dart';
+import 'package:softorium_daily_planner/features/daily_planner/data/daily_tasks_storage.dart';
 import 'package:softorium_daily_planner/features/daily_planner/providers/daily_planner_provider.dart';
 import 'package:softorium_daily_planner/features/daily_planner/widgets/days_horizontal_scroll.dart';
 import 'package:softorium_daily_planner/features/daily_planner/widgets/tasks_list.dart';
@@ -11,7 +12,7 @@ class DailyPlannerPage extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => DailyPlannerProvider(),
+          create: (context) => DailyPlannerProvider(DailyTasksStorage()),
         ),
       ],
       child: Unfocus(
@@ -63,7 +64,7 @@ class _TaskListDecoration extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               offset: const Offset(0, 8),
-              color: Color(0xff260347).withOpacity(.08),
+              color: AppColors.shadow.withOpacity(.08),
               blurRadius: 8,
             ),
           ],
@@ -88,7 +89,12 @@ class _PlanDateHeader extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Text('План на день ${selectedDay.dateReadable}'),
+      child: Text(
+        'План на день ${selectedDay.dateReadable}',
+        style: TextStyle(
+          fontWeight: FontWeight.w300,
+        ),
+      ),
     );
   }
 }

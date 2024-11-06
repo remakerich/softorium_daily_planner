@@ -8,7 +8,7 @@
 
 ## Релиз
 
-- [APK-файл приложения](https://drive.google.com/file/d/1NbRmr8AiBwMfi1xZjp--9yvpCPaPT1-F/view?usp=sharing)
+- [APK-файл приложения](https://drive.google.com/file/d/1GuNmK7Xyv2FacjHQz0pHfo-sh2Xfe_lo/view?usp=sharing)
 
 ## Инструкция по сборке и запуску
 
@@ -23,8 +23,10 @@
 
 4. Выполните `flutter pub get` для загрузки зависимостей
 
-5. Для запуска интеграционного теста
+5. Запустить unit и widget тесты `flutter test`, либо с помощью интерфейса IDE
 
-`flutter driver --target=test/test_app.dart --driver=test/integration_test.dart`
+6. Для запуска интеграционного теста подключить эмулятор или реальное устройство и выполнить
 
-6. Для сборки apk-файла выполните `flutter build apk`
+`flutter driver --target=integration_test/test_app.dart --driver=integration_test/integration_test.dart`
+
+7. Для сборки apk-файла выполните `flutter build apk`

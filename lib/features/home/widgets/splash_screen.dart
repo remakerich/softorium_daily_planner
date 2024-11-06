@@ -55,7 +55,7 @@ class _NativeSplashTransition extends StatelessWidget {
       curve: Curves.ease,
       opacity: nativeSplash ? 1 : 0,
       child: Container(
-        color: Color(0xffC8C7F9),
+        color: AppColors.gradientStart,
       ),
     );
   }
@@ -150,15 +150,8 @@ class _GradientBackground extends StatelessWidget {
       curve: Curves.ease,
       opacity: moveAvatar ? 0 : 1,
       child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xffC8C7F9),
-              Color(0xffFCC8C5),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+        decoration: BoxDecoration(
+          gradient: AppColors.backgroundGradient,
         ),
       ),
     );

@@ -37,6 +37,7 @@ dev_dependencies:
   flutter_lints:
   build_runner:
   flutter_native_splash:
+  mocktail:
 
 # dart run flutter_native_splash:create
 flutter_native_splash:
