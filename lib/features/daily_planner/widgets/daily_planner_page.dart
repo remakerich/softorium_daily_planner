@@ -91,9 +91,6 @@ class _PlanDateHeader extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         'План на день ${selectedDay.dateReadable}',
-        style: TextStyle(
-          fontWeight: FontWeight.w300,
-        ),
       ),
     );
   }

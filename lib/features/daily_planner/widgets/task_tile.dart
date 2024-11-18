@@ -55,7 +55,6 @@ class _TaskTitle extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.w300,
         color: task.isDone ? AppColors.taskDone : null,
       ),
     );
@@ -82,10 +81,10 @@ class _DeleteTaskButton extends StatelessWidget {
         child: Text(
           'Удалить',
           style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w300,
+            fontSize: 13,
+            color: Colors.red,
+            fontWeight: FontWeight.w600,
             fontStyle: FontStyle.italic,
-            decoration: TextDecoration.underline,
           ),
         ),
       ),

@@ -10,14 +10,12 @@ class AppColors {
   static const taskDone = Color(0xffD9D9D9);
   static const shadow = Color(0xff260347);
   static const navBarItem = Color(0xffF4F4F5);
-  static const gradientStart = Color(0xffF9F3FC);
-  static const gradientEnd = Color(0xffFAF1E7);
+  static const gradientStart = Color(0xffC8C7F9);
+  static const gradientEnd = Color(0xffFCC8C5);
 
   static final backgroundGradient = LinearGradient(
     colors: [
       AppColors.gradientStart,
-      AppColors.gradientStart,
-      AppColors.gradientEnd,
       AppColors.gradientEnd,
     ],
     begin: Alignment(-1.0, -1),
